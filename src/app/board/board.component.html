@@ -1,0 +1,7 @@
+<mat-card>
+  <mat-card-title>{{board?.name}}</mat-card-title>
+  <mat-card-content class="board-card-content">
+    <app-column *ngFor="let column of board?.columns" [column]="column"></app-column>
+  </mat-card-content>
+</mat-card>
+

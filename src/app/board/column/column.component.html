@@ -1,0 +1,6 @@
+<mat-card class="example-card">
+  <mat-card-title>{{column?.name}}</mat-card-title>
+  <mat-card-content class="column-card-content">
+    <app-entry *ngFor="let entry of column?.entries" [entry]="entry"></app-entry>
+  </mat-card-content>
+</mat-card>

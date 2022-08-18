@@ -1,0 +1,4 @@
+<button (click)="addNewBoard()">Add new Board</button>
+<div class="board-container">
+  <app-board *ngFor="let board of boardService.getPublicBoards() | async" [board]="board"></app-board>
+</div>

@@ -1,5 +1,11 @@
-<mat-card class="example-card">
+<mat-card class="entry-card">
+  <button class="delete-button"
+          (click)="deleteEntry()"
+          mat-mini-fab
+          color="accent"><mat-icon>delete</mat-icon></button>
   <mat-card-content>
-    {{entry?.content}}
+    <p (click)="startRenameEntry()"
+       [style.display]="renaming ? 'none' : 'block'">{{entry.content}}</p>
+    <textarea matInput #boardTitleInputField (blur)="stopRenameEntry()" [(ngModel)]="entry.content" [style.display]="renaming ? 'block' : 'none'"></textarea>
   </mat-card-content>
 </mat-card>

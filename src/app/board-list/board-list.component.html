@@ -1,4 +1,6 @@
-<button (click)="addNewBoard()">Add new Board</button>
+<button mat-fab color="primary"
+        class="add-board-button"
+        (click)="addNewBoard()"><mat-icon>add</mat-icon></button>
 <div class="board-container">
   <app-board *ngFor="let board of boardService.getPublicBoards() | async" [board]="board"></app-board>
 </div>

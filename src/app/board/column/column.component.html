@@ -1,6 +1,22 @@
 <mat-card class="example-card">
-  <mat-card-title>{{column?.name}}</mat-card-title>
-  <mat-card-content class="column-card-content">
-    <app-entry *ngFor="let entry of column?.entries" [entry]="entry"></app-entry>
+  <mat-card-title class="card-title">
+    <div class="column-actions">
+      <button mat-mini-fab color="primary" (click)="addEntry()"><mat-icon>add</mat-icon></button>
+      <button mat-mini-fab color="accent" (click)="deleteColumn()"><mat-icon>delete</mat-icon></button>
+    </div>
+    <p (click)="startRenameColumn()"
+       [style.display]="renaming ? 'none' : 'block'">{{column.name}}</p>
+    <input matInput #boardTitleInputField (blur)="stopRenameColumn()" [(ngModel)]="column.name"
+           [style.display]="renaming ? 'block' : 'none'">
+  </mat-card-title>
+  <mat-card-content class="column-card-content"
+                    (cdkDropListDropped)="drop($event)"
+                    [cdkDropListData]="column.entries"
+                    cdkDropList>
+    <app-entry *ngFor="let entry of column.entries; let i = index"
+               cdkDrag
+               [entry]="entry"
+               (save)="saveColumn()"
+               (delete)="deleteEntry(i)"></app-entry>
   </mat-card-content>
 </mat-card>

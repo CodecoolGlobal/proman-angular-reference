@@ -1,4 +1,24 @@
 .board-card-content {
   display: flex;
   flex-direction: row;
+  gap: 10px;
+}
+
+.board-actions {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 0;
+
+  &:not(:hover) > button {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  button:not(:hover) {
+    opacity: 10%;
+    filter: grayscale(1);
+  }
+  > * {
+    margin: 3px;
+  }
 }

@@ -1,4 +1,38 @@
+:host {
+  flex: 1 1 0;
+}
+
 .column-card-content {
   display: flex;
   flex-direction: column;
+  gap: 5px;
+}
+
+.card-title {
+  position: relative;
+  margin-bottom: 20px;
+
+  &:not(:hover) button {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+}
+
+.column-actions {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 0;
+
+  button:not(:hover) {
+    opacity: 10%;
+    filter: grayscale(1);
+  }
+  > * {
+    margin: 3px;
+  }
 }

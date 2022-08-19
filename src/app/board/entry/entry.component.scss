@@ -1,0 +1,15 @@
+.entry-card {
+  display: block;
+  position: relative;
+
+  .delete-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  &:not(:hover) > .delete-button {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}

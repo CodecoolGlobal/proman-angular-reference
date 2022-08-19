@@ -24,13 +24,9 @@ export class BoardService implements OnDestroy {
   }
 
   public addNewBoard(): void {
-    const board = new Board('New Board', [
-      new Column('New', []),
-      new Column('In Progress', []),
-      new Column('Testing', []),
-      new Column('Done', [])
-    ]);
-    this.db.collection(PUBLIC_BOARD_COLLECTION_NAME).add(board.toObject())
+    const board = new Board('New Board', [new Column('New', []), new Column('In Progress', []), new Column('Testing', []), new Column('Done', [])]);
+    this.db.collection(PUBLIC_BOARD_COLLECTION_NAME)
+      .add(this.boardToObject(board))
       .then(boardReference => console.log('New Board added successfully', boardReference))
       .catch(error => console.error('Error creating new Board', error));
   }
@@ -41,7 +37,31 @@ export class BoardService implements OnDestroy {
 
   private init() {
     this.subscription = this.collection
-      .valueChanges()
+      .valueChanges({idField: 'id'})
       .subscribe(boards => this.publicBoards.next(boards));
+  }
+
+  public save(board: Board) {
+    const dataToSave = this.db
+      .collection(PUBLIC_BOARD_COLLECTION_NAME)
+      .doc(board.id)
+      .set(this.boardToObject(board))
+      .then(result => {
+        console.log('Saved board with id ' + board.id, result);
+      });
+  }
+
+  public delete(board: Board) {
+    this.db
+      .collection(PUBLIC_BOARD_COLLECTION_NAME)
+      .doc(board.id)
+      .delete()
+      .then(result => {
+        console.log('Deleted board with id ' + board.id, result);
+      });
+  }
+
+  private boardToObject(board: Board): any {
+    return JSON.parse(JSON.stringify(board));
   }
 }

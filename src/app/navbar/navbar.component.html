@@ -1,0 +1,36 @@
+<mat-toolbar>
+  <a [routerLink]="['']">Proman</a>
+  <span class="example-spacer"></span>
+
+  <!-- Logout -->
+  <button (click)="logout()"
+          *ngIf="loggedIn"
+          mat-icon-button class="example-icon favorite-icon"
+          aria-label="Example icon-button with heart icon">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+  <!-- Admin page -->
+  <button [routerLink]="['admin']"
+          *ngIf="loggedIn && isAdmin()"
+          mat-icon-button class="example-icon"
+          aria-label="Example icon-button with share icon">
+    <mat-icon>manage_accounts</mat-icon>
+  </button>
+
+  <!-- Register -->
+  <button [routerLink]="['register']"
+          *ngIf="!loggedIn"
+          mat-icon-button class="example-icon"
+          aria-label="Example icon-button with share icon">
+    <mat-icon>person_add</mat-icon>
+  </button>
+
+  <!-- Login -->
+  <button [routerLink]="['login']"
+          *ngIf="!loggedIn"
+          mat-icon-button class="example-icon"
+          aria-label="Example icon-button with share icon">
+    <mat-icon>login</mat-icon>
+  </button>
+</mat-toolbar>

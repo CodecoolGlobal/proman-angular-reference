@@ -18,6 +18,23 @@ import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import { RegistrationComponent } from './auth/registration/registration.component';
+import { LoginComponent } from './auth/login/login.component';
+import {firebase, firebaseui, FirebaseUIModule} from 'firebaseui-angular';
+import { NavbarComponent } from './navbar/navbar.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { AdminComponent } from './admin/admin.component';
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = {
+  signInFlow: 'popup',
+  signInOptions: [
+    firebase.auth.EmailAuthProvider.PROVIDER_ID
+  ],
+  tosUrl: 'https://codecool.com/en/cookie-policy/',
+  privacyPolicyUrl: 'https://codecool.com/en/privacy-policy/',
+  credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO
+};
 
 @NgModule({
   declarations: [
@@ -25,13 +42,18 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     BoardListComponent,
     BoardComponent,
     ColumnComponent,
-    EntryComponent
+    EntryComponent,
+    RegistrationComponent,
+    LoginComponent,
+    NavbarComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatDividerModule,
@@ -39,7 +61,9 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    DragDropModule
+    DragDropModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,7 @@
            [style.display]="renaming ? 'block' : 'none'">
   </mat-card-title>
   <mat-card-content class="column-card-content"
+                    style="min-height: 50px"
                     (cdkDropListDropped)="drop($event)"
                     [cdkDropListData]="column.entries"
                     cdkDropList>
